@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: django_prod
+    command: gunicorn Love.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/static
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+volumes:
+  static_volume:
